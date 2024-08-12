@@ -1,0 +1,76 @@
+version: '3.9'
+services:
+  app:
+    restart: always
+    build: .
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+      - mailpit
+      - rabbit
+  worker:
+    restart: always
+    build: .
+    # command: celery -A app worker -l INFO
+    command: celery -A app worker -l INFO --queues=celery,special_queue
+    env_file:
+      - .env
+    depends_on:
+      - app
+  # worker-beat:
+  #   restart: always
+  #   build: .
+  #   command: celery -A app beat -l INFO
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - worker
+
+  postgres:
+    restart: always
+    image: postgres:15.3-alpine
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - app
+  redis:
+    restart: always
+    image: redis:7.0-alpine
+
+  mailpit:
+    image: axllent/mailpit
+    restart: always
+    volumes:
+      - ./mailpit-data:/mailpit-data
+    ports:
+      - 8025:8025
+      - 1025:1025
+    env_file:
+      - .env
+
+
+  rabbit:
+    image: rabbitmq:3.10.7-management
+    hostname: rabbitmq
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5672:5672
+
+volumes:
+  postgres-data:
+
+  

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}
+Payment
+{% endblock %}
+{% block content %}
+
+<form action="{% url 'users:payment' %}" method="post">
+    {% csrf_token %}
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ STRIPE_PUBLIC_KEY }}"
+            data-amount="1000"
+            data-name="My Online Store"
+            data-description="Example charge"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto">
+    </script>
+  </form>
+  {% endblock %}
+
+
+<!-- 
+  <!DOCTYPE html>
+<html>
+<head>
+    <title>Create Subscription</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <h2>Choose a subscription plan</h2>
+    <form id="subscription-form">
+        <input type="radio" name="subscription_type" value="basic"> Basic ($10/month)<br>
+        <input type="radio" name="subscription_type" value="premium"> Premium ($20/month)<br>
+        <div id="card-element"></div>
+        <button id="submit-button">Subscribe</button>
+    </form>
+
+    <script>
+        var stripe = Stripe('YOUR_STRIPE_PUBLIC_KEY');
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        var form = document.getElementById('subscription-form');
+        var submitButton = document.getElementById('submit-button');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.createToken(cardElement).then(function(result) {
+                if (result.error) {
+                    // Ошибка при создании токена
+                } else {
+                    // Отправляем токен на сервер для создания подписки
+                    createSubscription(result.token.id);
+                }
+            });
+        });
+
+        function createSubscription(stripeToken) {
+            var subscriptionType = document.querySelector('input[name="subscription_type"]:checked').value;
+            fetch('/create_subscription/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    subscription_type: subscriptionType,
+                    stripe_token: stripeToken
+                })
+            }).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                if (data.success) {
+                    // Успешно создана подписка
+                } else {
+                    // Произошла ошибка при создании подписки
+                }
+            });
+        }
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+</body>
+</html> -->

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}
+Signup
+{% endblock %}
+{% block content %}
+
+<div class="form-signin w-100 m-auto">
+
+    <form method="post" class="needs-validation">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal">Please fill the form</h1>
+
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email"
+                class="form-control {% if form.email.value and not form.email.errors%}is-valid{%elif form.email.errors%}is-invalid{%endif%}"
+                name="email" id="email" placeholder="name@example.com"
+                value="{% if form.email.value and not form.email.errors %}{{ form.email.value }}{% endif %}">
+            <div class="invalid-feedback">
+                {{form.email.errors}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="first_name">First name</label>
+            <input type="first_name"
+                class="form-control {% if form.first_name.value and not form.first_name.errors%}is-valid{%elif form.first_name.errors%}is-invalid{%endif%}"
+                name="first_name" id="first_name" placeholder="enter your first name"
+                value="{% if form.first_name.value and not form.first_name.errors%}{{ form.first_name.value }}{% endif %}">
+            <div class="invalid-feedback">
+                {{form.first_name.errors}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last name</label>
+            <input type="last_name"
+                class="form-control {% if form.last_name.value and not form.last_name.errors%}is-valid{%elif form.last_name.errors%}is-invalid{%endif%}"
+                name="last_name" id="last_name" placeholder="enter your last name"
+                value="{% if form.last_name.value and not form.last_name.errors%}{{ form.last_name.value }}{% endif %}">
+            <div class="invalid-feedback">
+                {{form.last_name.errors}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="birthday">birthday</label>
+            <input type="date"
+                class="form-control {% if form.birthday.value and not form.birthday.errors%}is-valid{%elif form.birthday.errors%}is-invalid{%endif%}"
+                name="birthday" id="birthday" placeholder="enter your birthday"
+                value="{% if form.birthday.value and not form.birthday.errors%}{{ form.birthday.value }}{% endif %}">
+            <span id="startDateSelected"></span>
+            <div class="invalid-feedback">
+                {{form.birthday.errors}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pwd1">Password</label>
+            <input type="password"
+                class="form-control {% if form.password2.value and not form.password2.errors%}is-valid{%elif form.password2.errors%}is-invalid{%endif%}"
+                name="password1" id="pwd1" placeholder="make up password"
+                value="{% if form.password1.value and not form.password2.errors%}{{ form.password1.value }}{% endif %}">
+        </div>
+        <div class="form-group">
+            <label for="pwd2">Repeat Password</label>
+            <input type="password"
+                class="form-control {% if form.password2.value and not form.password2.errors%}is-valid{%elif form.password2.errors%}is-invalid{%endif%}"
+                name="password2" id="pwd2" placeholder="Repeat Password"
+                value="{% if form.password2.value and not form.password2.errors%}{{ form.password2.value }}{% endif %}">
+            <div class="invalid-feedback">
+                {{form.password2.errors}}
+            </div>
+        </div>
+
+        <button class="btn btn-primary w-100 py-2" type="submit">Submit</button>
+        <p class="mt-5 mb-3 text-body-secondary">© 2017–2023</p>
+    </form>
+</div>
+{% endblock %}

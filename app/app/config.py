@@ -1,0 +1,36 @@
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+MINIO_STORAGE_ACCESS_KEY = os.environ.get("MINIO_STORAGE_ACCESS_KEY")
+MINIO_STORAGE_SECRET_KEY = os.environ.get("MINIO_STORAGE_SECRET_KEY")
+MINIO_STORAGE_ENDPOINT = os.environ.get("MINIO_STORAGE_ENDPOINT")
+
+POSTGRES_USER = os.environ.get("POSTGRES_USER")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+POSTGRES_DB = os.environ.get("POSTGRES_DB")
+DB_HOST = os.environ.get("DB_HOST")
+
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
+
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND")
+
+IS_DEV_MAIL = os.environ.get("DEV_MAIL")
+HOST = os.environ.get("HOST")
+
+
+REDIS_TEMPORARY_STORAGE_HOST = os.environ.get("REDIS_TEMPORARY_STORAGE_HOST")
+REDIS_TEMPORARY_STORAGE_PORT = os.environ.get("REDIS_TEMPORARY_STORAGE_PORT")
+REDIS_TEMPORARY_STORAGE_DB = os.environ.get("REDIS_TEMPORARY_STORAGE_PORT")
+
+
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")

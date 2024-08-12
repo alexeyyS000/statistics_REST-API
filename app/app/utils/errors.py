@@ -1,0 +1,2 @@
+class BaseHttpError(Exception):
+    pass

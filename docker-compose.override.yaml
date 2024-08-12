@@ -1,0 +1,15 @@
+services:
+  postgres:
+    ports:
+     - 5432:5432
+  app:
+    ports:
+      - 8000:8000
+
+  redis:
+    ports:
+      - 6379:6379
+
+  rabbit:
+    ports:
+      - 15672:15672

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}
+Token
+{% endblock %}
+{% block content %}
+
+<style>
+    .text-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .text-content {
+        flex: 1;
+    }
+    .button-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+</style>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="container mt-4">
+        <div class="text-container">
+            <div class="text-content">
+                <p class="text-break" id="tokenText">{{token}}</p>
+            </div>
+            <button type="button" class="copy-button btn btn-secondary" onclick="copyText()">Copy</button>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-primary" type="submit">{% if is_token_exist %}update token{% else %}create token{% endif %}</button>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    function copyText() {
+        var text = document.getElementById("tokenText");
+        var selection = window.getSelection();
+        var range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand("copy");
+    }
+</script>
+
+{% endblock %}
