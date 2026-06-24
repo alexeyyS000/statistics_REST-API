@@ -17,7 +17,4 @@ A service for collecting survey data and city updates from the Moscow Active Cit
 * Developed a REST API for accessing and analyzing collected statistics;
 * Implemented JWT-based authentication and authorization;
 * Integrated Stripe for subscription plan payments;
-* Built a web scraping service using Playwright for automated data collection;
-* Implemented data processing and persistence in PostgreSQL;
-* Configured asynchronous task execution with Celery and RabbitMQ;
 * Containerized the application using Docker for easy deployment and scalability.
